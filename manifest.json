@@ -1,0 +1,19 @@
+{
+    "manifest_version": 3,
+    "name": "Unhide Text Extension",
+    "version": "1.0",
+    "description": "Unhide hidden text on specific pages.",
+    "permissions": [
+      "activeTab"
+    ],
+    "host_permissions": [
+      "*://*/*"
+    ],
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["content.js"]
+      }
+    ]
+  }
+  
