@@ -7,11 +7,16 @@ function unhideHiddenText() {
         // Remove inline styles that hide text
         el.style.visibility = "visible";
         el.style.opacity = "1";
-        el.style.display = "block";
+        
+        // Only set display to block if it was originally none
+        if (getComputedStyle(el).display === "none") {
+            el.style.display = "block";
+        }
 
         // Attempt to unmask sensitive text
         if (el.textContent.includes("****")) {
-            el.textContent = el.getAttribute('data-ssn') || el.textContent.replace(/\*/g, '0'); // Replace as needed
+            const ssn = el.getAttribute('data-ssn');
+            el.textContent = ssn ? ssn : el.textContent.replace(/\*/g, '0'); // Replace as needed
         }
     });
 
