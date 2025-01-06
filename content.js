@@ -1,4 +1,4 @@
-// Function to unhide text
+// Function to unhide text by modifying visibility and opacity
 function unhideHiddenText() {
     // Select elements containing hidden text
     const hiddenElements = document.querySelectorAll('[class*="hidden"], [style*="visibility:hidden"], [style*="opacity:0"], [style*="display:none"]');
@@ -23,5 +23,27 @@ function unhideHiddenText() {
     console.log("Unhidden elements updated.");
 }
 
-// Run the function when the content script is loaded
+// Alternative method to unhide text by toggling visibility
+function toggleVisibility() {
+    const hiddenElements = document.querySelectorAll('[class*="hidden"], [style*="visibility:hidden"], [style*="opacity:0"], [style*="display:none"]');
+    
+    hiddenElements.forEach((el) => {
+        // Toggle visibility without changing display
+        el.style.visibility = el.style.visibility === "hidden" ? "visible" : "hidden";
+        el.style.opacity = el.style.opacity === "0" ? "1" : "0";
+
+        // Attempt to unmask sensitive text
+        if (el.textContent.includes("****")) {
+            const ssn = el.getAttribute('data-ssn');
+            el.textContent = ssn ? ssn : el.textContent.replace(/\*/g, '0'); // Replace as needed
+        }
+    });
+
+    console.log("Visibility toggled for hidden elements.");
+}
+
+// Run the original function when the content script is loaded
 unhideHiddenText();
+
+// Optionally, you can run the alternative method
+// toggleVisibility();
