@@ -1,0 +1,4 @@
+/* Example CSS to blur text */
+.hidden-text {
+    filter: blur(5px);
+}
