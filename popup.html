@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Specific Text Blur</title>
+    <style>
+        body {
+            width: 200px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h3>Text Blur Extension</h3>
+    <button id="hideTextButton">Hide Text</button>
+    <script>
+        document.getElementById('hideTextButton').addEventListener('click', () => {
+            chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
+                chrome.scripting.executeScript({
+                    target: {tabId: tabs[0].id},
+                    function: hideSpecificText
+                });
+            });
+        });
+    </script>
+</body>
+</html>
